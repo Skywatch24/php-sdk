@@ -1,0 +1,16 @@
+{
+  "name": "skywatch/camlock",
+  "description": "http://camlock.skywatch24.com",
+  "autoload": {
+    "psr-4": {
+        "Skywatch\\": "skywatch/",
+        "Skywatch\\Logger\\": "skywatch/logger"
+    },
+    "files": [
+      "skywatch/Helper.php"
+    ]
+  },
+  "license": [
+    "GPL-3.0-or-later"
+  ]
+}
