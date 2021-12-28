@@ -38,7 +38,7 @@ if ($_GET['action'] == 'devices') {
         $end = DateTime::createFromFormat('Y-m-d H:i', $end_date . " " . $end_time);
         $schedule = ($start->format('U')+$timezone_offset) . " " . ($end->format('U')+$timezone_offset);
 
-        $ret = $skywatch->setSchedulePasscode($doorlock_id, $schedule);
+        $ret = $skywatch->setSchedulePasscode($doorlock_id, $schedule, $passcode_num, $passcode_alias);
     } else {
         $ret = $skywatch->setAlwaysPasscode($doorlock_id, $passcode_num, $passcode_alias);
     }
@@ -59,6 +59,3 @@ if ($_GET['action'] == 'devices') {
     $ret = $skywatch->getDeviceHistory($doorlock_id, $start_time, $end_time);
     echo $ret;
 }
-
-?>
-
