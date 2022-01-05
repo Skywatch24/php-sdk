@@ -111,6 +111,14 @@ class SkywatchResource
 
     function removePasscode($device_id, $code_id)
     {
+        $params = array(
+            'access_token' => $this->_token,
+            'user_code' => json_encode(array(
+                'id' => $code_id
+            ))
+        );
+        $ret = curl(self::$base_url, "api/v2/devices/$device_id/passcode", $params, 'POST');
+        return $ret['data'];
     }
 
     function getDeviceHistory($device_id, $start_time, $end_time)

@@ -21,7 +21,11 @@ PHP library for skywatch platform.
 
 [Doorlock API](https://hackmd.io/@skywatch/SyqnMUWRw)
 
+[Doorlock API Error Response](https://gist.github.com/alon21034/555203ac0fbcf748dde5fcc8a5122f22#file-error_response-md)
+
 [Camera API](https://hackmd.io/@skywatch/HJr4Y8dhd)
+
+<img src="./images/sdk.png">
 
 ### initialize
 
@@ -327,6 +331,17 @@ $skywatch->setSchedulePasscode($doorlock_id, $schedule, $passcode_num, $passcode
 | `passcode_alias` | `string` | YES      | passcode name                                                         |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits)                                               |
 | `schedule`       | `string` | YES      | Timestamp format: `startTime - endTime` (ex. `1640577960-1640581560`) |
+
+### Delete Passcode
+
+```php
+$skywatch->removePasscode($doorlock_id, $code_id);
+```
+
+| Property      | Type     | Required | Description |
+| ------------- | -------- | -------- | ----------- |
+| `doorlock_id` | `string` | YES      | Sensor id   |
+| `code_id`     | `string` | YES      | Passcode id |
 
 ### Open / Close Lock
 
