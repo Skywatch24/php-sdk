@@ -115,7 +115,8 @@ class SkywatchResource
             'access_token' => $this->_token,
             'user_code' => json_encode(array(
                 'id' => $code_id
-            ))
+            )),
+            'method_type' => 'DELETE'
         );
         $ret = curl(self::$base_url, "api/v2/devices/$device_id/passcode", $params, 'POST');
         return $ret['data'];
