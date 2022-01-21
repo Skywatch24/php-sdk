@@ -27,6 +27,7 @@ if ($_GET['action'] == 'devices') {
     $passcode_num = $_GET['passcode_num'];
     $passcode_alias = $_GET['passcode_alias'];
     $is_schedule = isset($_GET['start_date']) && isset($_GET['start_time']) && isset($_GET['end_date']) && isset($_GET['end_time']);
+    $is_onetime = isset($_GET['onetime']);
     if ($is_schedule) {
         $start_date = urldecode($_GET['start_date']);
         $start_time = urldecode($_GET['start_time']);
@@ -37,9 +38,10 @@ if ($_GET['action'] == 'devices') {
         // form schedule passcode format
         $start = DateTime::createFromFormat('Y-m-d H:i', $start_date . " " . $start_time);
         $end = DateTime::createFromFormat('Y-m-d H:i', $end_date . " " . $end_time);
-        $schedule = ($start->format('U') + $timezone_offset) . " " . ($end->format('U') + $timezone_offset);
 
-        $ret = $skywatch->setSchedulePasscode($doorlock_id, $schedule, $passcode_num, $passcode_alias);
+        $ret = $skywatch->setSchedulePasscode($doorlock_id, ($start->format('U') + $timezone_offset), ($end->format('U') + $timezone_offset), $passcode_num, $passcode_alias);
+    } else if ($is_onetime) {
+        $ret = $skywatch->setOnetimePasscode($doorlock_id, $passcode_num, $passcode_alias);
     } else {
         $ret = $skywatch->setAlwaysPasscode($doorlock_id, $passcode_num, $passcode_alias);
     }

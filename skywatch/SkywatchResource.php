@@ -102,14 +102,44 @@ class SkywatchResource
         return $ret['data'];
     }
 
-    function setSchedulePasscode($device_id, $schedule, $passcode_num, $passcode_alias)
+    function setOnetimePasscode($device_id, $passcode_num, $passcode_alias)
     {
         $params = array(
             'access_token' => $this->_token,
             'user_code' => json_encode(array(
                 'code' => $passcode_num,
                 'alias' => $passcode_alias,
-                'schedule' => $schedule
+                'onetime' => true,
+            ))
+        );
+
+        $ret = curl(self::$base_url, "api/v2/devices/$device_id/passcode", $params, 'POST');
+        return $ret['data'];
+    }
+
+    function setSchedulePasscode($device_id, $start_time, $end_time, $passcode_num, $passcode_alias)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'user_code' => json_encode(array(
+                'code' => $passcode_num,
+                'alias' => $passcode_alias,
+                'schedule' => $start_time . "-" . $end_time,
+            ))
+        );
+        $ret = curl(self::$base_url, "api/v2/devices/$device_id/passcode", $params, 'POST');
+        return $ret['data'];
+    }
+
+    function setRecurringPasscode($device_id, $start_date, $end_date, $start_time, $end_time, $week, $timezone, $passcode_num, $passcode_alias)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'user_code' => json_encode(array(
+                'code' => $passcode_num,
+                'alias' => $passcode_alias,
+                'recurring' => $start_date . "-" . $end_date . ":" . $start_time . "-" . $end_time . ":" . $week,
+                'timezone' => $timezone,
             ))
         );
         $ret = curl(self::$base_url, "api/v2/devices/$device_id/passcode", $params, 'POST');

@@ -102,6 +102,23 @@ generate_form($html, 'api.php', 'get', function (&$html) {
 });
 $html .= '<br>';
 
+$html .= generate_title('Set Onetime Passcode', 'h3');
+$html .= generate_description("設定一次性密碼");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_passcode', True);
+    $html .= generate_edittext('onetime', 'True', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('lock_id', 'doorlock_id', False);
+    $html .= '<br>';
+    $html .= generate_edittext('passcode_num', '0-9, 4 digits', False);
+    $html .= '<br>';
+    $html .= generate_edittext('passcode_alias', 'Passcode Alias');
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Passcode');
+});
+$html .= '<br>';
+
 $html .= generate_title('Set Schedule Passcode', 'h3');
 $html .= generate_description("設定排程密碼");
 generate_form($html, 'api.php', 'get', function (&$html) {

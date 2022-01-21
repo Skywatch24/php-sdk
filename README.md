@@ -320,18 +320,49 @@ $skywatch->setAlwaysPasscode($doorlock_id, $passcode_num, $passcode_alias);
 | `passcode_alias` | `string` | YES      | passcode name           |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits) |
 
+### Set Onetime Passcode
+
+```php
+$skywatch->setOnetimePasscode($doorlock_id, $passcode_num, $passcode_alias);
+```
+
+| Property         | Type     | Required | Description             |
+| ---------------- | -------- | -------- | ----------------------- |
+| `doorlock_id`    | `string` | YES      | Sensor id               |
+| `passcode_alias` | `string` | YES      | passcode name           |
+| `passcode_num`   | `string` | YES      | passcode (4 - 8 digits) |
+
 ### Set Schedule Passcode
 
 ```php
-$skywatch->setSchedulePasscode($doorlock_id, $schedule, $passcode_num, $passcode_alias);
+$skywatch->etSchedulePasscode($doorlock_id, $start_time, $end_time, $passcode_num, $passcode_alias);
 ```
 
-| Property         | Type     | Required | Description                                                           |
-| ---------------- | -------- | -------- | --------------------------------------------------------------------- |
-| `doorlock_id`    | `string` | YES      | Sensor id                                                             |
-| `passcode_alias` | `string` | YES      | passcode name                                                         |
-| `passcode_num`   | `string` | YES      | passcode (4 - 8 digits)                                               |
-| `schedule`       | `string` | YES      | Timestamp format: `startTime - endTime` (ex. `1640577960-1640581560`) |
+| Property         | Type     | Required | Description             |
+| ---------------- | -------- | -------- | ----------------------- |
+| `doorlock_id`    | `string` | YES      | Sensor id               |
+| `passcode_alias` | `string` | YES      | passcode name           |
+| `passcode_num`   | `string` | YES      | passcode (4 - 8 digits) |
+| `start_time`     | `string` | YES      | timestamp               |
+| `end_time`       | `string` | YES      | timestamp               |
+
+### Set Recurring Passcode
+
+```php
+setRecurringPasscode($doorlock_id, $start_date, $end_date, $start_time, $end_time, $week, $timezone, $passcode_num, $passcode_alias)
+```
+
+| Property         | Type     | Required | Description                               |
+| ---------------- | -------- | -------- | ----------------------------------------- |
+| `doorlock_id`    | `string` | YES      | Sensor id                                 |
+| `passcode_alias` | `string` | YES      | passcode name                             |
+| `passcode_num`   | `string` | YES      | passcode (4 - 8 digits)                   |
+| `start_date`     | `string` | YES      | start date timestamp                      |
+| `end_date`       | `string` | YES      | end date timestamp                        |
+| `start_time`     | `string` | YES      | seconds of start time ex. 8:00 -> 28800   |
+| `end_time`       | `string` | YES      | seconds of end time ex. 8:00 -> 28800     |
+| `week`           | `string` | YES      | selected week list ex. Sun,Mon,Wed -> 013 |
+| `timezone`       | `string` | YES      | cuttent time ex. 8                        |
 
 ### Delete Passcode
 
