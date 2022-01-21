@@ -53,6 +53,12 @@ $access_token = $skywatch->getAccessToken($auth_code);
 $skywatch->init($access_token);
 ```
 
+### User Info
+
+```php
+$skywatch->getUserInfo();
+```
+
 ### Device List
 
 ```php
@@ -164,6 +170,17 @@ $skywatch->getDeviceList();
 | `name`     | Device name                                                                                    |
 | `online`   | Online: 1, Offline: 0                                                                          |
 | `model_id` | Gateway 2: 74, Gateway 2.5: 91, DoorLock: 63, PowerLock(斷電解鎖): 83, PowerLock(上電解鎖): 84 |
+
+### Set Device Name
+
+```php
+$skywatch->updateDeviceName($device_id, $name)
+```
+
+| Property    | Type     | Required | Description |
+| ----------- | -------- | -------- | ----------- |
+| `device_id` | `string` | YES      | Sensor id   |
+| `name`      | `string` | YES      | Sensor name |
 
 ### Lock Info
 

@@ -61,6 +61,16 @@ class SkywatchResource
         return $ret['data'];
     }
 
+    function updateDeviceName($device_id, $name)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'params[name]' => $name,
+        );
+        $ret = curl(self::$base_url, "api/v2/devices/$device_id/settings", $params, 'POST');
+        return $ret['data'];
+    }
+
     function getStatus($device_id)
     {
         $params = array(
