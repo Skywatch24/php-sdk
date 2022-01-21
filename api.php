@@ -8,7 +8,8 @@ $auth_code = @$_GET['auth_code'];
 $auth_code = urldecode($auth_code);
 
 $skywatch = new SkywatchResource();
-$skywatch -> init($auth_code);
+$access_token = $skywatch->getAccessToken($auth_code);
+$skywatch->init($access_token);
 
 if ($_GET['action'] == 'devices') {
     $ret = $skywatch->getDeviceList();
@@ -36,7 +37,7 @@ if ($_GET['action'] == 'devices') {
         // form schedule passcode format
         $start = DateTime::createFromFormat('Y-m-d H:i', $start_date . " " . $start_time);
         $end = DateTime::createFromFormat('Y-m-d H:i', $end_date . " " . $end_time);
-        $schedule = ($start->format('U')+$timezone_offset) . " " . ($end->format('U')+$timezone_offset);
+        $schedule = ($start->format('U') + $timezone_offset) . " " . ($end->format('U') + $timezone_offset);
 
         $ret = $skywatch->setSchedulePasscode($doorlock_id, $schedule, $passcode_num, $passcode_alias);
     } else {
@@ -49,13 +50,13 @@ if ($_GET['action'] == 'devices') {
     echo $ret;
 } else if ($_GET['action'] == 'control_doorlock') {
     $doorlock_id = $_GET['lock_id'];
-    $stauts = $_GET['status'] == '1'?'1':'0'; // 1: Locked, 0: Unlocked
+    $stauts = $_GET['status'] == '1' ? '1' : '0'; // 1: Locked, 0: Unlocked
     $ret = $skywatch->updateStatus($doorlock_id, $status);
     echo $ret;
 } else if ($_GET['action'] == 'get_histroy') {
     $doorlock_id = $_GET['lock_id'];
-    $start_time = time() - 86400;
-    $end_time = time();
-    $ret = $skywatch->getDeviceHistory($doorlock_id, $start_time, $end_time);
+    $start_time = $_GET['start_time'];
+    $end_time = $_GET['end_time'];
+    $ret = $skywatch->getLockHistory($doorlock_id, $start_time, $end_time);
     echo $ret;
 }

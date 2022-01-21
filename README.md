@@ -49,7 +49,8 @@ When user grants authorization, the website will redirect to the `redirect_url` 
 ```php
 use Skywatch\SkywatchResource;
 $skywatch = new SkywatchResource();
-$skywatch -> init($auth_code);
+$access_token = $skywatch->getAccessToken($auth_code);
+$skywatch->init($access_token);
 ```
 
 ### Device List
@@ -364,3 +365,15 @@ If the model_id is 84, please set
 status = 0 -> locked
 status = 1 -> unlocked
 ```
+
+### Get Lock History
+
+```php
+$skywatch->getLockHistory($doorlock_id, $start_time, $end_time)
+```
+
+| Property      | Type     | Required | Description |
+| ------------- | -------- | -------- | ----------- |
+| `doorlock_id` | `string` | YES      | Sensor id   |
+| `start_time`  | `string` | YES      | timestamp   |
+| `end_time`    | `string` | YES      | timestamp   |

@@ -22,8 +22,14 @@ class SkywatchResource
         $this->_token = "";
     }
 
-    function init($auth_code)
+    function init($access_token)
     {
+        $this->_token = $access_token;
+    }
+
+    function getAccessToken($auth_code)
+    {
+
         $params = array(
             'app_id' => self::$APP_ID,
             'app_secret' => self::$APP_SECRET,
@@ -32,8 +38,9 @@ class SkywatchResource
         );
 
         $output = curl(self::$base_url, "api/general/oauth_access_token.php", $params, 'POST');
-        $this->_token = $output['data'];
-        return json_encode($output);
+
+        //return json_encode($output);
+        return $output['data'];
     }
 
     function getUserInfo()
@@ -122,7 +129,7 @@ class SkywatchResource
         return $ret['data'];
     }
 
-    function getDeviceHistory($device_id, $start_time, $end_time)
+    function getLockHistory($device_id, $start_time, $end_time)
     {
         $params = array(
             'access_token' => $this->_token,
