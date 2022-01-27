@@ -54,8 +54,8 @@ $skywatch->setAlwaysPasscode($doorlock_id, $passcode_num, $passcode_alias);
 | Property         | Type     | Required | Description             |
 | ---------------- | -------- | -------- | ----------------------- |
 | `doorlock_id`    | `string` | YES      | Sensor id               |
-| `passcode_alias` | `string` | YES      | passcode name           |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits) |
+| `passcode_alias` | `string` | YES      | passcode name           |
 
 ### Set Onetime Passcode
 
@@ -66,8 +66,8 @@ $skywatch->setOnetimePasscode($doorlock_id, $passcode_num, $passcode_alias);
 | Property         | Type     | Required | Description             |
 | ---------------- | -------- | -------- | ----------------------- |
 | `doorlock_id`    | `string` | YES      | Sensor id               |
-| `passcode_alias` | `string` | YES      | passcode name           |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits) |
+| `passcode_alias` | `string` | YES      | passcode name           |
 
 ### Set Schedule Passcode
 
@@ -80,8 +80,8 @@ $skywatch->setSchedulePasscode($doorlock_id, $start_time, $end_time, $passcode_n
 | `doorlock_id`    | `string` | YES      | Sensor id               |
 | `start_time`     | `string` | YES      | timestamp               |
 | `end_time`       | `string` | YES      | timestamp               |
-| `passcode_alias` | `string` | YES      | passcode name           |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits) |
+| `passcode_alias` | `string` | YES      | passcode name           |
 
 ### Set Recurring Passcode
 

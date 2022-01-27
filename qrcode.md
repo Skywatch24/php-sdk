@@ -15,8 +15,8 @@ $skywatch->setAlwaysQRcode($device_ids, $passcode_num, $passcode_alias)
 | Property         | Type     | Required | Description                                |
 | ---------------- | -------- | -------- | ------------------------------------------ |
 | `device_ids`     | `array`  | YES      | Lock id list ex. `array('59974', '59998')` |
-| `passcode_alias` | `string` | YES      | passcode name                              |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits)                    |
+| `passcode_alias` | `string` | YES      | passcode name                              |
 
 ### Set Onetime QRcode
 
@@ -27,8 +27,8 @@ $skywatch->setOnetimeQRcode($device_ids, $passcode_num, $passcode_alias);
 | Property         | Type     | Required | Description                                |
 | ---------------- | -------- | -------- | ------------------------------------------ |
 | `device_ids`     | `array`  | YES      | Lock id list ex. `array('59974', '59998')` |
-| `passcode_alias` | `string` | YES      | passcode name                              |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits)                    |
+| `passcode_alias` | `string` | YES      | passcode name                              |
 
 ### Set Schedule QRcode
 
@@ -41,8 +41,8 @@ $skywatch->setScheduleQRcode($device_ids, $start_time, $end_time, $passcode_num,
 | `device_ids`     | `array`  | YES      | Lock id list ex. `array('59974', '59998')` |
 | `start_time`     | `string` | YES      | timestamp                                  |
 | `end_time`       | `string` | YES      | timestamp                                  |
-| `passcode_alias` | `string` | YES      | passcode name                              |
 | `passcode_num`   | `string` | YES      | passcode (4 - 8 digits)                    |
+| `passcode_alias` | `string` | YES      | passcode name                              |
 
 ### Set Recurring QRcode
 
