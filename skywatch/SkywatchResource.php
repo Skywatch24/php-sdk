@@ -179,4 +179,80 @@ class SkywatchResource
         $ret = curl(self::$base_url, "api/v2/devices/$device_id/history", $params, 'GET');
         return $ret['data'];
     }
+
+    function getQRcodeList()
+    {
+        $params = array(
+            'access_token' => $this->_token
+        );
+        $ret = curl(self::$base_url, "api/v2/sharing", $params, 'GET');
+        return $ret['data'];
+    }
+
+    function setAlwaysQRcode($device_ids, $passcode_num, $passcode_alias)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'sharing_passcode' => $passcode_num,
+            'sharing_name' => $passcode_alias,
+            'device_ids' => json_encode($device_ids),
+            'method_type' => 'POST',
+        );
+        $ret = curl(self::$base_url, "api/v2/sharing", $params, 'POST');
+        return $ret['data'];
+    }
+
+    function setOnetimeQRcode($device_ids, $passcode_num, $passcode_alias)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'sharing_passcode' => $passcode_num,
+            'sharing_name' => $passcode_alias,
+            'device_ids' => json_encode($device_ids),
+            'onetime' => true,
+            'method_type' => 'POST',
+        );
+        $ret = curl(self::$base_url, "api/v2/sharing", $params, 'POST');
+        return $ret['data'];
+    }
+
+    function setScheduleQRcode($device_ids, $start_time, $end_time, $passcode_num, $passcode_alias)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'sharing_passcode' => $passcode_num,
+            'sharing_name' => $passcode_alias,
+            'device_ids' => json_encode($device_ids),
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+            'method_type' => 'POST',
+        );
+        $ret = curl(self::$base_url, "api/v2/sharing", $params, 'POST');
+        return $ret['data'];
+    }
+
+    function setRecurringQRcode($device_ids, $start_date, $end_date, $start_time, $end_time, $week, $timezone, $passcode_num, $passcode_alias)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'sharing_passcode' => $passcode_num,
+            'sharing_name' => $passcode_alias,
+            'device_ids' => json_encode($device_ids),
+            'recurring' => $start_date . "-" . $end_date . ":" . $start_time . "-" . $end_time . ":" . $week,
+            'timezone' => $timezone,
+            'method_type' => 'POST',
+        );
+        $ret = curl(self::$base_url, "api/v2/sharing", $params, 'POST');
+        return $ret['data'];
+    }
+
+    function removeQRcode($sharingUid)
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'method_type' => 'DELETE'
+        );
+        $ret = curl(self::$base_url, "api/v2/sharing/$sharingUid", $params, 'POST');
+        return $ret['data'];
+    }
 }
