@@ -35,7 +35,7 @@ $html = '<body>' . PHP_EOL;
 
 $html .= generate_title('Demo Page', 'h1');
 
-$html .= "<a target=\"_blank\" href=\"https://beta.skywatch24.com/oauth2.php?app_id=1&redirect_uri=http://localhost:8888/index.php\" > Link to Skywatch </a>";
+$html .= "<a target=\"_blank\" href=\"https://service.skywatch24.com/oauth2.php?app_id=1&redirect_uri=http://localhost:8888/index.php\" > Link to Skywatch </a>";
 
 $html .= generate_title('Get Device List', 'h3');
 $html .= generate_description("id 為 device 的序號，用來對 Device 做資料查詢及操作。可透過 model_id = 63 判斷裝置是否為電子門鎖。<br /><br /> model_id:'74' -> Gateway 2 <br /> model_id:'91' -> Gateway 2.5 <br /> model_id:'63' -> DoorLock <br /> model_id:'83' -> PowerLock (斷電解鎖) <br /> model_id:'84' -> PowerLock (上電解鎖)");

@@ -7,7 +7,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 class SkywatchResource
 {
 
-    public static $base_url = "https://beta.skywatch24.com/";
+    public static $base_url = "https://service.skywatch24.com/";
     public static $DOORLOCK = '63';
     public static $ALWAYS = 'always';
     public static $SCHEDULE = 'schedule';
