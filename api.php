@@ -52,7 +52,7 @@ if ($_GET['action'] == 'devices') {
     echo $ret;
 } else if ($_GET['action'] == 'control_doorlock') {
     $doorlock_id = $_GET['lock_id'];
-    $stauts = $_GET['status'] == '1' ? '1' : '0'; // 1: Locked, 0: Unlocked
+    $status = $_GET['status'] == '1' ? '1' : '0'; // 1: Locked, 0: Unlocked
     $ret = $skywatch->updateStatus($doorlock_id, $status);
     echo $ret;
 } else if ($_GET['action'] == 'get_histroy') {
