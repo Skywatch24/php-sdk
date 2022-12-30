@@ -201,6 +201,76 @@ generate_form($html, 'api.php', 'get', function (&$html) {
 });
 $html .= '<br>';
 
+$html .= generate_title('Get Remote Access Shared Token List', 'h3');
+$html .= generate_description("遠端派卡清單");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'get_remote_access_tokens', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Get Remote Access Shared Tokens');
+});
+$html .= '<br>';
+
+$html .= generate_title('Set Always Remote Access Shared Token', 'h3');
+$html .= generate_description("設定常駐遠端派卡");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_remote_access_token', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('lock_ids', "lock ids, split by space", False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_alias', 'token alias');
+    $html .= '<br>';
+    $html .= generate_edittext('token_activate_time', 'link activate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_deactivate_time', 'link deactivate time', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Remote Access Shared Token');
+});
+$html .= '<br>';
+
+$html .= generate_title('Set Schedule Remote Access Shared Token', 'h3');
+$html .= generate_description("設定排程遠端派卡");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_remote_access_token', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('lock_ids', "lock ids, split by space", False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_alias', 'token alias');
+    $html .= '<br>';
+    $html .= generate_edittext('token_activate_time', 'link activate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_deactivate_time', 'link deactivate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('access_activate_time', 'access activate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('access_deactivate_time', 'access deactivate time', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Remote Access Shared Token');
+});
+$html .= '<br>';
+
+$html .= generate_title('Set Remote Access Card Number', 'h3');
+$html .= generate_description("設定遠端派卡卡號");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_remote_access_card', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('token', "remote access token", False);
+    $html .= '<br>';
+    $html .= generate_edittext('card_number', 'card number');
+    $html .= '<br>';
+    $html .= generate_edittext('access_alias', 'access alias', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Remote Access Card Number');
+});
+$html .= '<br>';
+
 $html .= '</body>';
 $html .= '</html>';
 echo $html;
