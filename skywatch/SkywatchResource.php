@@ -255,4 +255,16 @@ class SkywatchResource
         $ret = curl(self::$base_url, "api/v2/sharing/$sharingUid", $params, 'POST');
         return $ret['data'];
     }
+
+    function getUnregisteredCardList($start_time, $end_time) 
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        );
+        $ret = curl(self::$base_url, "api/v2/unregistered-card", $params, 'GET');
+        return $ret;
+    }
+
 }

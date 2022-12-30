@@ -11,6 +11,13 @@ $skywatch = new SkywatchResource();
 $access_token = $skywatch->getAccessToken($auth_code);
 $skywatch->init($access_token);
 
+function decode_curl_ret_data($ret) {
+    if (!is_null(json_decode($ret['data'], true))) {
+        $ret['data'] = json_decode($ret['data'], true);
+    }
+    return $ret;
+}
+
 if ($_GET['action'] == 'devices') {
     $ret = $skywatch->getDeviceList();
     echo $ret;
@@ -61,4 +68,9 @@ if ($_GET['action'] == 'devices') {
     $end_time = $_GET['end_time'];
     $ret = $skywatch->getLockHistory($doorlock_id, $start_time, $end_time);
     echo $ret;
+} else if ($_GET['action'] == 'get_unregistered_card_list') {
+    $start_time = $_GET['start_time'];
+    $end_time = $_GET['end_time'];
+    $ret = $skywatch->getUnregisteredCardList($start_time, $end_time);
+    echo json_encode(decode_curl_ret_data($ret));
 }

@@ -186,6 +186,21 @@ generate_form($html, 'api.php', 'get', function (&$html) {
 });
 $html .= '<br>';
 
+$html .= generate_title('Get Unregisterd Cards', 'h3');
+$html .= generate_description("讀取非法卡號");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'get_unregistered_card_list', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('start_time', 'start_time (timestamp)', False);
+    $html .= '<br>';
+    $html .= generate_edittext('end_time', 'end_time (timestamp)', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Get Unregisterd Cards');
+});
+$html .= '<br>';
+
 $html .= '</body>';
 $html .= '</html>';
 echo $html;
