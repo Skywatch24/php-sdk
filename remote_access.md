@@ -1,5 +1,13 @@
 # Remote Access
 
+### Get Remote Access Shared Token
+get list of created remote access shared token info
+
+```php
+$skywatch->getRemoteAccessSharedTokens();
+```
+
+
 ### Set Always Remote Access Shared Token
 
 ```php
@@ -27,3 +35,15 @@ $skywatch->setScheduleRemoteAccessSharedToken($lock_ids, $token_alias, $access_a
 | `access_deactivate_time` | `string` | YES      | remote access deactivate timestamp         |
 | `token_activate_time`    | `string` | YES      | shared token activate timestamp             |
 | `token_deactivate_time`  | `string` | YES      | shared token deactivate timestamp           |
+
+### Set Remote Access Card Number
+
+```php
+$skywatch->setRemoteAccessCardNumber($token, $card_number, $access_alias);
+```
+
+| Property                 | Type     | Required | Description           |
+| ------------------------ | -------- | -------- | ----------------------|
+| `token`                  | `string` | YES      | shared token          |
+| `card_number`            | `string` | YES      | card number           |
+| `access_alias`           | `string` | YES      | access alias          |
