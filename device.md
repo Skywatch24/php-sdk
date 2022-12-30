@@ -118,7 +118,7 @@ $skywatch->getDeviceList();
 | `name`                   | Device name                                                                                    |
 | `online`                 | Online: 1, Offline: 0                                                                          |
 | `doorlock_qrcode_enable` | If support Qrcode Access or not                                                                |
-| `model_id`               | Gateway 2: 74, Gateway 2.5: 91, DoorLock: 63, PowerLock(斷電解鎖): 83, PowerLock(上電解鎖): 84 |
+| `model_id`               | Gateway 2: 74, Gateway 2.5: 91, Gateway 3: 95, DoorLock: 63, PowerLock(斷電解鎖): 83, PowerLock(上電解鎖): 84, CardReader: 97, CardReader(配門位感測): 99 |
 
 ### Set Device Name
 
@@ -221,7 +221,7 @@ $skywatch->getStatus($doorlock_id);
 #### Note:
 
 ```
-If the model_id is 63 or 83, please check "switch_control"
+If the model_id is 63, 83, 97 or 99, please check "switch_control"
 value=0 -> unlocked
 value=1 -> locked
 If the model_id is 84, please check "switch_control"
@@ -243,7 +243,7 @@ $skywatch->updateStatus($doorlock_id, $status);
 #### Note:
 
 ```
-If the model_id is 63 or 83, please set
+If the model_id is 63, 83, 97 or 99, please set
 status = 0 -> unlocked
 status = 1 -> locked
 If the model_id is 84, please set
