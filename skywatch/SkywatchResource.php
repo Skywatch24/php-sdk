@@ -309,9 +309,9 @@ class SkywatchResource
         return $ret;
     }
 
-    function setRemoteAccessCardNumber($link_token, $card_number, $access_alias) {
+    function setRemoteAccessCardNumber($shared_token, $card_number, $access_alias) {
         $params = array(
-            'token' => $link_token
+            'token' => $shared_token
         );
         $remote_access_ret = curl(self::$base_url, "api/v2/shared-link/access-creation", $params, 'GET');
         if ($remote_access_ret['http_code'] == 200) {
@@ -322,7 +322,7 @@ class SkywatchResource
             $remote_access = !empty($settable_remote_access_list) ? array_shift($settable_remote_access_list) : array_shift($remote_access_data);
 
             $params = array(
-                'token' => $link_token,
+                'token' => $shared_token,
                 'alias' => $access_alias,
                 'code' => $card_number
             );

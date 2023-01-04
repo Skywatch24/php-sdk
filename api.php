@@ -94,10 +94,10 @@ if ($_GET['action'] == 'devices') {
     }
     echo json_encode(decode_curl_ret_data($ret));
 } else if ($_GET['action'] == 'set_remote_access_card') {
-    $link_token = $_GET['token'];
+    $shared_token = $_GET['token'];
     $card_number = $_GET['card_number'];
     $access_alias = $_GET['access_alias'];
 
-    $ret = $skywatch->setRemoteAccessCardNumber($link_token, $card_number, $access_alias);
+    $ret = $skywatch->setRemoteAccessCardNumber($shared_token, $card_number, $access_alias);
     echo json_encode(decode_curl_ret_data($ret));
 }
