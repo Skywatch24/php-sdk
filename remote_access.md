@@ -47,3 +47,17 @@ $skywatch->setRemoteAccessCardNumber($token, $card_number, $access_alias);
 | `token`                  | `string` | YES      | shared token          |
 | `card_number`            | `string` | YES      | card number           |
 | `access_alias`           | `string` | YES      | access alias          |
+
+
+### Get Unregisterd Card List By Shared Token
+
+```php
+$skywatch->getUnregisteredCardListBySharedToken($token, $start_time, $end_time);
+```
+
+| Property         | Type     | Required | Description             |
+| ---------------- | -------- | -------- | ----------------------- |
+| `token`                  | `string` | YES      | shared token          |
+| `start_time`     | `string` | YES      | timestamp               |
+| `end_time`       | `string` | YES      | timestamp               |
+
