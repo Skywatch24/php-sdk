@@ -267,6 +267,17 @@ class SkywatchResource
         return $ret;
     }
 
+    function getUnregisteredCardListBySharedToken($shared_token, $start_time, $end_time) 
+    {
+        $params = array(
+            'access_creation_token' => $shared_token,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        );
+        $ret = curl(self::$base_url, "api/v2/unregistered-card", $params, 'GET');
+        return $ret;
+    }
+
     function getRemoteAccessSharedTokens()
     {
         $params = array(
