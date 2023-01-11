@@ -53,4 +53,4 @@ $skywatch->init($access_token);
 
 [QRcode Access](/qrcode.md)
 
-[Doorlock API Error Response](https://gist.github.com/alon21034/555203ac0fbcf748dde5fcc8a5122f22#file-error_response-md)
+[Doorlock API Error Response](/error_response.md)

@@ -255,4 +255,94 @@ class SkywatchResource
         $ret = curl(self::$base_url, "api/v2/sharing/$sharingUid", $params, 'POST');
         return $ret['data'];
     }
+
+    function getUnregisteredCardList($start_time, $end_time) 
+    {
+        $params = array(
+            'access_token' => $this->_token,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        );
+        $ret = curl(self::$base_url, "api/v2/unregistered-card", $params, 'GET');
+        return $ret;
+    }
+
+    function getUnregisteredCardListBySharedToken($shared_token, $start_time, $end_time) 
+    {
+        $params = array(
+            'access_creation_token' => $shared_token,
+            'start_time' => $start_time,
+            'end_time' => $end_time
+        );
+        $ret = curl(self::$base_url, "api/v2/unregistered-card", $params, 'GET');
+        return $ret;
+    }
+
+    function getRemoteAccessSharedTokens()
+    {
+        $params = array(
+            'access_token' => $this->_token,
+        );
+        $ret = curl(self::$base_url, "api/v2/shared-link/access-creation", $params, 'GET');
+        return $ret;
+    }
+
+    function setAlwaysRemoteAccessSharedToken($device_ids, $token_alias, $token_activate_time, $token_deactivate_time)
+    {
+        $validity = array('start_time'=>$token_activate_time, 'end_time'=>$token_deactivate_time);
+        $params = array(
+            'access_token' => $this->_token,
+            'max_num' => 1,
+            'link_alias' => $token_alias,
+            'device_ids' => json_encode($device_ids),
+            'method_type' => 'POST',
+            'setting' => '{}',
+            'validity' => json_encode($validity)
+        );
+        $ret = curl(self::$base_url, "api/v2/shared-link/access-creation", $params, 'POST');
+        return $ret;
+    }
+
+    function setScheduleRemoteAccessSharedToken($device_ids, $token_alias, $access_activate_time, $access_deactivate_time, $token_activate_time, $token_deactivate_time)
+    {
+        $validity = array('start_time'=>$token_activate_time, 'end_time'=>$token_deactivate_time);
+        $setting = array('schedule'=>"{$access_activate_time}-{$access_deactivate_time}");
+        $params = array(
+            'access_token' => $this->_token,
+            'max_num' => 1,
+            'link_alias' => $token_alias,
+            'device_ids' => json_encode($device_ids),
+            'method_type' => 'POST',
+            'setting' => json_encode($setting),
+            'validity' => json_encode($validity)
+        );
+        $ret = curl(self::$base_url, "api/v2/shared-link/access-creation", $params, 'POST');
+        return $ret;
+    }
+
+    function setRemoteAccessCardNumber($shared_token, $card_number, $access_alias) {
+        $params = array(
+            'token' => $shared_token
+        );
+        $remote_access_ret = curl(self::$base_url, "api/v2/shared-link/access-creation", $params, 'GET');
+        if ($remote_access_ret['http_code'] == 200) {
+            $remote_access_data = json_decode($remote_access_ret['data'], true);
+            $settable_remote_access_list = array_filter($remote_access_data['access_list'], function($access) {
+                return $access['status'] == 'settable';
+            });
+            $remote_access = !empty($settable_remote_access_list) ? array_shift($settable_remote_access_list) : array_shift($remote_access_data);
+
+            $params = array(
+                'token' => $shared_token,
+                'alias' => $access_alias,
+                'code' => $card_number
+            );
+
+            $id = $remote_access['id'];
+            $uri = "api/v2/shared-link/access-creation/{$id}/card";
+            $ret = curl(self::$base_url, $uri, $params, 'POST');
+            return $ret;
+        }
+        return $remote_access_ret;
+    }
 }

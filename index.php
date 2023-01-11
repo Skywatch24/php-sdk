@@ -38,7 +38,7 @@ $html .= generate_title('Demo Page', 'h1');
 $html .= "<a target=\"_blank\" href=\"https://service.skywatch24.com/oauth2.php?app_id=1&redirect_uri=http://localhost:8888/index.php\" > Link to Skywatch </a>";
 
 $html .= generate_title('Get Device List', 'h3');
-$html .= generate_description("id 為 device 的序號，用來對 Device 做資料查詢及操作。可透過 model_id = 63 判斷裝置是否為電子門鎖。<br /><br /> model_id:'74' -> Gateway 2 <br /> model_id:'91' -> Gateway 2.5 <br /> model_id:'63' -> DoorLock <br /> model_id:'83' -> PowerLock (斷電解鎖) <br /> model_id:'84' -> PowerLock (上電解鎖)");
+$html .= generate_description("id 為 device 的序號，用來對 Device 做資料查詢及操作。可透過 model_id = 63 判斷裝置是否為電子門鎖。<br /><br /> model_id:'74' -> Gateway 2 <br /> model_id:'91' -> Gateway 2.5 <br /> model_id:'95' -> Gateway 3 <br /> model_id:'63' -> DoorLock <br /> model_id:'83' -> PowerLock (斷電解鎖) <br /> model_id:'84' -> PowerLock (上電解鎖) <br /> model_id:'97' -> CardReader <br /> model_id:'99' -> CardReader (配門位感測)");
 
 generate_form($html, 'api.php', 'get', function (&$html) {
     global $auth_code;
@@ -49,7 +49,7 @@ generate_form($html, 'api.php', 'get', function (&$html) {
 $html .= '<br>';
 
 $html .= generate_title('Get Doorlock Info', 'h3');
-$html .= generate_description("cameraStatusCode = online|offline 表示裝置連線或離線, params['switch_control'] = 0|1 表示門鎖開啟或鎖上 <br /><br /> If the model_id is 63 or 83, please check 'switch_control' <br /> value=0 -> unlocked <br /> value=1 -> locked <br /> If the model_id is 84, please check 'switch_control' <br /> value=0 -> locked <br /> value=1 -> unlocked");
+$html .= generate_description("cameraStatusCode = online|offline 表示裝置連線或離線, params['switch_control'] = 0|1 表示門鎖開啟或鎖上 <br /><br /> If the model_id is 63, 83, 97 or 99, please check 'switch_control' <br /> value=0 -> unlocked <br /> value=1 -> locked <br /> If the model_id is 84, please check 'switch_control' <br /> value=0 -> locked <br /> value=1 -> unlocked");
 
 
 generate_form($html, 'api.php', 'get', function (&$html) {
@@ -152,7 +152,7 @@ $html .= '<br>';
 // $html .= '<br>';
 
 $html .= generate_title('Set Doorlock Status', 'h3');
-$html .= generate_description("遠端開關電子門鎖 <br /><br /> If the model_id is 63 or 83, <br /> value=0 -> unlocked <br /> value=1 -> locked <br /> If the model_id is 84, <br /> value=0 -> locked <br /> value=1 -> unlocked");
+$html .= generate_description("遠端開關電子門鎖 <br /><br /> If the model_id is 63, 83, 97 or 99, <br /> value=0 -> unlocked <br /> value=1 -> locked <br /> If the model_id is 84, <br /> value=0 -> locked <br /> value=1 -> unlocked");
 generate_form($html, 'api.php', 'get', function (&$html) {
     global $auth_code;
     $html .= generate_edittext('action', 'control_doorlock', True);
@@ -183,6 +183,91 @@ generate_form($html, 'api.php', 'get', function (&$html) {
     $html .= '<br>';
     $html .= '<br>';
     $html .= generate_input('submit', 'Get History');
+});
+$html .= '<br>';
+
+$html .= generate_title('Get Unregisterd Cards', 'h3');
+$html .= generate_description("讀取非法卡號");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'get_unregistered_card_list', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('start_time', 'start_time (timestamp)', False);
+    $html .= '<br>';
+    $html .= generate_edittext('end_time', 'end_time (timestamp)', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Get Unregisterd Cards');
+});
+$html .= '<br>';
+
+$html .= generate_title('Get Remote Access Shared Token List', 'h3');
+$html .= generate_description("遠端派卡清單");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'get_remote_access_tokens', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Get Remote Access Shared Tokens');
+});
+$html .= '<br>';
+
+$html .= generate_title('Set Always Remote Access Shared Token', 'h3');
+$html .= generate_description("設定常駐遠端派卡");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_remote_access_token', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('lock_ids', "lock ids, split by space", False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_alias', 'token alias');
+    $html .= '<br>';
+    $html .= generate_edittext('token_activate_time', 'link activate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_deactivate_time', 'link deactivate time', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Remote Access Shared Token');
+});
+$html .= '<br>';
+
+$html .= generate_title('Set Schedule Remote Access Shared Token', 'h3');
+$html .= generate_description("設定排程遠端派卡");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_remote_access_token', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('lock_ids', "lock ids, split by space", False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_alias', 'token alias');
+    $html .= '<br>';
+    $html .= generate_edittext('token_activate_time', 'link activate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('token_deactivate_time', 'link deactivate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('access_activate_time', 'access activate time', False);
+    $html .= '<br>';
+    $html .= generate_edittext('access_deactivate_time', 'access deactivate time', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Remote Access Shared Token');
+});
+$html .= '<br>';
+
+$html .= generate_title('Set Remote Access Card Number', 'h3');
+$html .= generate_description("設定遠端派卡卡號");
+generate_form($html, 'api.php', 'get', function (&$html) {
+    global $auth_code;
+    $html .= generate_edittext('action', 'set_remote_access_card', True);
+    $html .= generate_edittext('auth_code', $auth_code, True);
+    $html .= generate_edittext('token', "remote access token", False);
+    $html .= '<br>';
+    $html .= generate_edittext('card_number', 'card number');
+    $html .= '<br>';
+    $html .= generate_edittext('access_alias', 'access alias', False);
+    $html .= '<br>';
+    $html .= '<br>';
+    $html .= generate_input('submit', 'Set Remote Access Card Number');
 });
 $html .= '<br>';
 

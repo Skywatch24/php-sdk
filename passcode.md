@@ -111,3 +111,15 @@ $skywatch->removePasscode($doorlock_id, $code_id);
 | ------------- | -------- | -------- | ----------- |
 | `doorlock_id` | `string` | YES      | Sensor id   |
 | `code_id`     | `string` | YES      | Passcode id |
+
+### Get Unregisterd Card List
+
+```php
+$skywatch->getUnregisteredCardList($start_time, $end_time);
+```
+
+| Property         | Type     | Required | Description             |
+| ---------------- | -------- | -------- | ----------------------- |
+| `start_time`     | `string` | YES      | timestamp               |
+| `end_time`       | `string` | YES      | timestamp               |
+
